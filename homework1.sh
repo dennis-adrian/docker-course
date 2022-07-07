@@ -27,7 +27,7 @@ docker run -d \
 -v sonarqube_logs:/opt/sonarqube/logs \
 -v sonarqube_extensions:/opt/sonarqube/extensions \
 --network homework \
-sonarqube:8.9-community
+sonarqube:8.9-community &&
 
 # creating jenkins container
 docker run -d \
@@ -37,4 +37,12 @@ docker run -d \
 --restart=on-failure \
 -v jenkins_home:/var/jenkins_home \
 --network homework \
-jenkins/jenkins:lts-jdk11
+jenkins/jenkins:lts-jdk11 &&
+
+# creating nexus container
+docker run -d \
+--name nexus \
+-p 8081:8081 \
+-v nexus-data:/nexus-data \
+--network homework \
+sonatype/nexus3
