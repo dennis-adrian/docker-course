@@ -45,4 +45,15 @@ docker run -d \
 -p 8081:8081 \
 -v nexus-data:/nexus-data \
 --network homework \
-sonatype/nexus3
+sonatype/nexus3 &&
+
+# creating portainer container
+docker run -d \
+--name portainer \
+-p 8000:8000 \
+-p 9443:9443 \
+--restart=always \
+-v /var/run/docker.sock:/var/run/docker.sock \
+-v portainer_data:/data \
+--network homework \
+portainer/portainer-ce:2.9.3
